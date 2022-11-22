@@ -1,5 +1,6 @@
 package com.secucom.secucom.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class AppCollaborateur {
     @Column(name = "id", nullable = false)
     private Long id;
     private String username;
+    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
     private String password;
     private String nom;
     private String prenom;

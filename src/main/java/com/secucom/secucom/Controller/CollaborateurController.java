@@ -1,22 +1,41 @@
 package com.secucom.secucom.Controller;
 
 import com.secucom.secucom.Model.AppCollaborateur;
+import com.secucom.secucom.Model.AppRole;
 import com.secucom.secucom.Service.AccountService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.Data;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/Collaborateur")
 public class CollaborateurController {
     private AccountService accountService;
-    @GetMapping("")
-    public List<AppCollaborateur> getCollab(AppCollaborateur appCollaborateur){
+    @GetMapping("/collaborateur")
+    public List<AppCollaborateur> getCollab(){
         return accountService.listCollabs();
     }
+    @PostMapping("/collaborateur")
+    public AppCollaborateur addCollab(@RequestBody AppCollaborateur appCollaborateur){
+        return accountService.addNewCollab(appCollaborateur);
+    }
+    @PostMapping("/role")
+    public AppRole addRole(@RequestBody AppRole appRole){
+        return accountService.addNewRole(appRole);
+    }
+  @PostMapping("/roleToUser")
+    public void AddRoleToCollab(@RequestBody RoleUserForm roleUserForm){
+      accountService.addRoleToCollab(roleUserForm.getUsername(), roleUserForm.getRoleName());
+  }
+
+
+
+}
+@Data
+class RoleUserForm{
+    private String username;
+    private String RoleName;
 
 }
