@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public interface AccountService {
-    AppCollaborateur addNewCollab(AppCollaborateur appCollaborateur);
+    Object addNewCollab(AppCollaborateur appCollaborateur);
     AppRole addNewRole(AppRole appRole);
     void addRoleToCollab(String username, String roleName);
     AppCollaborateur loadCollabByUsername(String username);
