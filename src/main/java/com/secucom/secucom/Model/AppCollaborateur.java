@@ -18,7 +18,7 @@ public class AppCollaborateur {
     @Column(name = "id", nullable = false)
     private Long id;
     private String username;
-    @JsonProperty(access = JsonProperty.Access.READ_WRITE)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String nom;
     private String prenom;
