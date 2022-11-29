@@ -2,6 +2,7 @@ package com.secucom.secucom.Service;
 
 import com.secucom.secucom.Model.AppCollaborateur;
 import com.secucom.secucom.Model.AppRole;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

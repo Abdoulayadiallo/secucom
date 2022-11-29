@@ -36,25 +36,24 @@ public class CollaborateurController {
     public Map<String, Object> user(@AuthenticationPrincipal OAuth2User principal) {
         return Collections.singletonMap("name", principal.getAttribute("name"));
     }
-    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/collaborateur")
     public List<AppCollaborateur> getCollab(){
         logger.info("Afficher tous les Collaborateur trouvé");
         return accountService.listCollabs();
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/collaborateur")
     public Object addCollab(@RequestBody AppCollaborateur appCollaborateur){
         logger.info("ajoute Collaborateur trouvé");
         return accountService.addNewCollab(appCollaborateur);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/role")
     public AppRole addRole(@RequestBody AppRole appRole){
         logger.info("ajoute un rôle");
         return accountService.addNewRole(appRole);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+   // @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/roleToUser")
     public void AddRoleToCollab(@RequestBody RoleUserForm roleUserForm){
         logger.info("ajouter role à un Collaborateur");

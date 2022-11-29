@@ -2,6 +2,7 @@ package com.secucom.secucom;
 
 import com.secucom.secucom.Model.AppCollaborateur;
 import com.secucom.secucom.Model.AppRole;
+import com.secucom.secucom.Model.Erole;
 import com.secucom.secucom.Service.AccountService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.util.ArrayList;
 
 @SpringBootApplication
-@EnableGlobalMethodSecurity(securedEnabled = true,prePostEnabled = true)
 public class SecucomApplication {
 
     public static void main(String[] args) {
@@ -27,8 +27,8 @@ public class SecucomApplication {
     @Bean
     CommandLineRunner start(AccountService accountService){
       return args -> {
-          accountService.addNewRole(new AppRole(null, "USER"));
-          accountService.addNewRole(new AppRole(null, "ADMIN"));
+          accountService.addNewRole(new AppRole(null, Erole.USER));
+          accountService.addNewRole(new AppRole(null, Erole.ADMIN));
 
           accountService.addNewCollab(new AppCollaborateur(null,"Ablo","1234","Diallo","Abdoulaye",new ArrayList<>()));
           accountService.addNewCollab(new AppCollaborateur(null,"user","1234","user","user",new ArrayList<>()));
@@ -36,7 +36,7 @@ public class SecucomApplication {
           accountService.addNewCollab(new AppCollaborateur(null,"user3","1234","user3","user3",new ArrayList<>()));
           accountService.addNewCollab(new AppCollaborateur(null,"user4","1234","user4","user4",new ArrayList<>()));
 
-          accountService.addRoleToCollab("Ablo","ADMIN");
+          accountService.addRoleToCollab("Ablo", "ADMIN");
           accountService.addRoleToCollab("user","USER");
           accountService.addRoleToCollab("user2","USER");
           accountService.addRoleToCollab("user3","USER");

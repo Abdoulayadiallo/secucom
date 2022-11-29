@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
                 AppCollaborateur appCollaborateur = accountService.loadCollabByUsername(username);
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
-                appCollaborateur.getAppRoles().forEach(r -> authorities.add(new SimpleGrantedAuthority(r.getRoleName())));
+                appCollaborateur.getAppRoles().forEach(r -> authorities.add(new SimpleGrantedAuthority(r.getRoleName().toString())));
                 return new User(appCollaborateur.getUsername(),appCollaborateur.getPassword(),authorities);
             }
         });
@@ -54,8 +54,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable();
         //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.formLogin();
-        //http.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/collaborateur/**").hasAuthority("ADMIN");
-        //http.authorizeHttpRequests().antMatchers(HttpMethod.GET,"/collaborateur/**").hasAnyAuthority("ADMIN","USER");
+        http.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/collaborateur/**").hasAuthority("ADMIN");
+        http.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/role/**").hasAuthority("ADMIN");
+        http.authorizeHttpRequests().antMatchers(HttpMethod.GET,"/role/**").hasAuthority("ADMIN");
+        http.authorizeHttpRequests().antMatchers(HttpMethod.POST,"/roleToUser/**").hasAuthority("ADMIN");
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.oauth2Login();
         //http.headers().frameOptions().disable();

@@ -2,6 +2,7 @@ package com.secucom.secucom.Service;
 
 import com.secucom.secucom.Model.AppCollaborateur;
 import com.secucom.secucom.Model.AppRole;
+import com.secucom.secucom.Model.Erole;
 import com.secucom.secucom.Repository.AppCollaborateurRepository;
 import com.secucom.secucom.Repository.AppRoleRepository;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 @Service
@@ -56,7 +56,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void addRoleToCollab(String username, String roleName) {
         AppCollaborateur appCollaborateur = appCollaborateurRepository.findByUsername(username);
-        AppRole appRole = appRoleRepository.findByRoleName(roleName);
+        AppRole appRole = appRoleRepository.findByRoleName(Erole.valueOf(roleName));
         appCollaborateur.getAppRoles().add(appRole);
     }
 
